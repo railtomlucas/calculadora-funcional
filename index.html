@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+
+        #calculator {
+            width: 200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        #display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            text-align: right;
+            font-size: 18px;
+            background-color: orange;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+       .btn {
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+       .operator {
+            background-color: black;
+            color: orange;
+        }
+
+        #clear {
+            background-color: red;
+        }
+
+        #equals {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input type="text" id="display" value="0">
+        <div id="buttons">
+            <div class="row">
+                <button class="btn" value="7">7</button>
+                <button class="btn" value="8">8</button>
+                <button class="btn" value="9">9</button>
+                <button id="add" class="btn operator">+</button>
+            </div>
+            <div class="row">
+                <button class="btn" value="4">4</button>
+                <button class="btn" value="5">5</button>
+                <button class="btn" value="6">6</button>
+                <button id="subtract" class="btn operator">-</button>
+            </div>
+            <div class="row">
+                <button class="btn" value="1">1</button>
+                <button class="btn" value="2">2</button>
+                <button class="btn" value="3">3</button>
+                <button id="multiply" class="btn operator">*</button>
+            </div>
+            <div class="row">
+                <button id="clear" class="btn" value="0">C</button>
+                <button class="btn" value="0">0</button>
+                <button id="equals" class="btn operator">=</button>
+                <button id="divide" class="btn operator">/</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        const buttons = Array.from(document.getElementsByClassName('btn'));
+        buttons.map( button => {
+            button.addEventListener('click', (e) => {
+                if(e.target.value === '=') {
+                    try {
+                        display.value = eval(display.value);
+                    } catch {
+                        display.value = "Error";
+                    }
+                } else if(e.target.value === 'C') {
+                    display.value = '0';
+                } else {
+                    if(display.value === '0') {
+                        display.value = e.target.value;
+                    } else {
+                        display.value += e.target.value;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
